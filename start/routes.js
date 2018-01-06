@@ -18,8 +18,4 @@ const Route = use('Route');
 Route.on('/').render('welcome');
 
 Route.on('/home').render('home');
-Route.get('/user/profile', ({ view }) => {
-  return view.render('user.profile', {
-    username: 'Gernamis'
-  });
-});
+Route.get('/user/profile', 'TodoController.profile');
