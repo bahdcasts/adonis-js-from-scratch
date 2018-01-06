@@ -15,7 +15,4 @@
 
 const Route = use('Route');
 
-Route.on('/').render('welcome');
-
-Route.on('/home').render('home');
-Route.get('/user/profile', 'TodoController.profile');
+Route.get('/', 'TodoController.index');

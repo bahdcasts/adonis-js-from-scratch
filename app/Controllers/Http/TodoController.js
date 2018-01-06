@@ -1,10 +1,19 @@
 'use strict'
 
 class TodoController {
-  profile({ view }) {
-    return view.render('user.profile', {
-      username: 'Gernamis'
-    });
+  index ({ view }) {
+    // fetch some data
+    const todos = [{
+      id: 1,
+      text: 'Buy some vegetables'
+    }, {
+      id: 2,
+      text: 'Complete online course assignments'
+    }, {
+      id: 3,
+      text: 'Make some chinese tea.'
+    }];
+    return view.render('home', { todos });
   }
 }
 

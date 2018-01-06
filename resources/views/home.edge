@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home view</title>
+  {{ css('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css') }}
 </head>
 <body>
   <h1>This is the home view</h1>
+  <ul>
+    @each(todo in todos)
+      <li>{{ todo.text }}</li>
+    @endeach
+  </ul>
 </body>
 </html>
