@@ -17,9 +17,3 @@ const Route = use('Route');
 const Todo = use('App/Models/Todo');
 
 Route.get('/', 'TodoController.index');
-
-Route.get('/test', async ({ response }) => {
-  const todos = await Todo.all();
-
-  return response.json(todos);
-});

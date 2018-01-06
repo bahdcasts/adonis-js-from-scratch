@@ -1,19 +1,13 @@
 'use strict'
 
+const Todo = use('App/Models/Todo');
+
 class TodoController {
-  index ({ view }) {
+  async index ({ view }) {
     // fetch some data
-    const todos = [{
-      id: 1,
-      text: 'Buy some vegetables'
-    }, {
-      id: 2,
-      text: 'Complete online course assignments'
-    }, {
-      id: 3,
-      text: 'Make some chinese tea.'
-    }];
-    return view.render('home', { todos });
+    const todos = await Todo.all();
+    
+    return view.render('home', { todos: todos.toJSON() });
   }
 }
 
