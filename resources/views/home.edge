@@ -13,8 +13,9 @@
       <div class="col-md-6 offset-md-3">
         <div class="card mb-5">
           <div class="card-body">
-            <form action="">
-              <input type="text" class="form-control" placeholder="Type in todo ..." autofocus>
+            <form action="{{ route('TodoController.store') }}" method="POST">
+              {{ csrfField() }}
+              <input type="text" class="form-control" name="text" placeholder="Type in todo ..." autofocus>
             </form>
           </div>
         </div>

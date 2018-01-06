@@ -9,6 +9,15 @@ class TodoController {
     
     return view.render('home', { todos: todos.toJSON() });
   }
+
+  async store ({ request, response }) {
+    const body = request.all();
+
+    const todo = await Todo.create({
+      text: body.text
+    });
+    return response.redirect('/');
+  }
 }
 
 module.exports = TodoController
