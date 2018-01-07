@@ -38,7 +38,7 @@
             @each(todo in todos)
             <li class="list-group-item">
               {{ todo.text }}
-              <span class="badge badge-danger float-right">Delete</span>
+              <a href="{{ route('TodoController.destroy', { id: todo.id }) }}" class="badge badge-danger float-right">Delete</a>
               <span class="badge badge-info float-right mr-2">Edit</span>
             </li>
             @endeach

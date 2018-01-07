@@ -37,6 +37,21 @@ class TodoController {
     session.flash({ notification: 'Todo created successfully.' });
     return response.redirect('/');
   }
+
+  async destroy({ response, session, params }) {
+    const { id } = params;
+    
+    const todo = await Todo.find(id);
+
+    if (todo) {
+      await todo.delete();
+      session.flash({ notification: 'Todo deleted successfully.' });
+      return response.redirect('/');
+    }
+
+    session.flash({ notification: 'Todo was not found.' });
+    return response.redirect('/');
+  }
 }
 
 module.exports = TodoController
