@@ -19,3 +19,5 @@ const Todo = use('App/Models/Todo');
 Route.get('/', 'TodoController.index');
 Route.post('/', 'TodoController.store');
 Route.get('/todos/delete/:id', 'TodoController.destroy');
+Route.get('/todos/edit/:id', 'TodoController.edit');
+Route.post('/todos/update/:id', 'TodoController.update');

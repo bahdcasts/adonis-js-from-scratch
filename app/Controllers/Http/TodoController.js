@@ -38,6 +38,35 @@ class TodoController {
     return response.redirect('/');
   }
 
+
+  async edit({ response, session, params, view }) {
+    const todo = await Todo.find(params.id);
+
+    if (todo) {
+      return view.render('edit-todo', { todo });
+    }
+
+    session.flash({ notification: 'Todo was not found.' });
+    return response.redirect('/');
+  }
+
+  async update({ response, request, session, params }) {
+    const { id } = params;
+    
+    const todo = await Todo.find(id);
+
+    if (todo) {
+      todo.text = request.all().text;
+      await todo.save();
+
+      session.flash({ notification: 'Todo updated successfully.' });
+      return response.redirect('/');
+    }
+
+    session.flash({ notification: 'Todo was not found.' });
+    return response.redirect('/');
+  }
+
   async destroy({ response, session, params }) {
     const { id } = params;
     
