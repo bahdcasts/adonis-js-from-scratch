@@ -1,51 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Todos List App with Adonis</title>
-  {{ css('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css') }}
-</head>
-<body>
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card mb-5">
-          @if(flashMessage('notification'))
-            <span class="alert alert-info">
-              {{ flashMessage('notification') }}
-            </span>
-          @endif
-          <div class="card-body">
-            <form action="{{ route('TodoController.store') }}" method="POST">
-              {{ csrfField() }}
-              <input type="text" class="form-control mb-3" name="text" placeholder="Type in todo ..." autofocus>
-              @if(hasErrorFor('text'))
-                <span class="text-danger">
-                  {{ getErrorFor('text') }}
-                </span>
-              @endif
-            </form>
-          </div>
-        </div>
+@layout('layouts.app')
 
-        <div class="card">
-          <div class="card-header text-center">
-            My todo-list
-          </div>
-          <ul class="list-group list-group-flush">
-            @each(todo in todos)
-            <li class="list-group-item">
-              {{ todo.text }}
-              <a href="{{ route('TodoController.destroy', { id: todo.id }) }}" class="badge badge-danger float-right">Delete</a>
-              <a href="{{ route('TodoController.edit', { id: todo.id }) }}" class="badge badge-info float-right mr-2">Edit</a>
-            </li>
-            @endeach
-          </ul>
-        </div>
-      </div>
-    </div>
+@section('title')
+Todos App with Adonis
+@endsection
+
+@section('content')
+<div class="card mb-5">
+  @if(flashMessage('notification'))
+    <span class="alert alert-info">
+      {{ flashMessage('notification') }}
+    </span>
+  @endif
+  <div class="card-body">
+    <form action="{{ route('TodoController.store') }}" method="POST">
+      {{ csrfField() }}
+      <input type="text" class="form-control mb-3" name="text" placeholder="Type in todo ..." autofocus>
+      @if(hasErrorFor('text'))
+        <span class="text-danger">
+          {{ getErrorFor('text') }}
+        </span>
+      @endif
+    </form>
   </div>
-</body>
-</html>
+</div>
+
+<div class="card">
+  <div class="card-header text-center">
+    My todo-list
+  </div>
+  <ul class="list-group list-group-flush">
+    @each(todo in todos)
+    <li class="list-group-item">
+      {{ todo.text }}
+      <a href="{{ route('TodoController.destroy', { id: todo.id }) }}" class="badge badge-danger float-right">Delete</a>
+      <a href="{{ route('TodoController.edit', { id: todo.id }) }}" class="badge badge-info float-right mr-2">Edit</a>
+    </li>
+    @endeach
+  </ul>
+</div>
+@endsection
