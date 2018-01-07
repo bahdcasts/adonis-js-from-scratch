@@ -12,6 +12,11 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="card mb-5">
+          @if(flashMessage('notification'))
+            <span class="alert alert-info">
+              {{ flashMessage('notification') }}
+            </span>
+          @endif
           <div class="card-body">
             <form action="{{ route('TodoController.store') }}" method="POST">
               {{ csrfField() }}
@@ -30,11 +35,13 @@
             My todo-list
           </div>
           <ul class="list-group list-group-flush">
+            @each(todo in todos)
             <li class="list-group-item">
-              Cras justo odio
+              {{ todo.text }}
               <span class="badge badge-danger float-right">Delete</span>
               <span class="badge badge-info float-right mr-2">Edit</span>
             </li>
+            @endeach
           </ul>
         </div>
       </div>

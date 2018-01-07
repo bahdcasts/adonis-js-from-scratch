@@ -34,6 +34,7 @@ class TodoController {
     const todo = await Todo.create({
       text: body.text
     });
+    session.flash({ notification: 'Todo created successfully.' });
     return response.redirect('/');
   }
 }
