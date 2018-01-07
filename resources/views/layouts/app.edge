@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="display: none;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,8 @@
     @endsection
   </title>
   {{ css('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css') }}
+  {{ css('https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css') }}
+  {{ css('style.css') }}
 </head>
 <body>
   <div class="container py-5">
@@ -19,5 +21,14 @@
       </div>
     </div>
   </div>
+  <!-- Pace js for some fancy loading. -->
+  {{ script('https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js') }}
+  <!-- HTML tag has a display: none style (gives it a display of none, so as not to preview raw html before bootstrap is loaded.) -->
+  <!-- When content is loaded, remove that display: none style. -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementsByTagName('html')[0].style = '';
+    });
+  </script>
 </body>
 </html>
