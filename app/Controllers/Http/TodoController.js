@@ -22,46 +22,24 @@ class TodoController {
   }
 
 
-  async edit({ response, session, params, view }) {
-    const todo = await Todo.find(params.id);
-
-    if (todo) {
-      return view.render('edit-todo', { todo });
-    }
-
-    session.flash({ notification: 'Todo was not found.' });
-    return response.redirect('/');
+  async edit({ request, view }) {
+    return view.render('edit-todo', { todo: request.todo });
   }
 
   async update({ response, request, session, params }) {
-    const { id } = params;
-    
-    const todo = await Todo.find(id);
+    const { todo } = request;
+    todo.text = request.all().text;
+    await todo.save();
 
-    if (todo) {
-      todo.text = request.all().text;
-      await todo.save();
-
-      session.flash({ notification: 'Todo updated successfully.' });
-      return response.redirect('/');
-    }
-
-    session.flash({ notification: 'Todo was not found.' });
+    session.flash({ notification: 'Todo updated successfully.' });
     return response.redirect('/');
   }
 
-  async destroy({ response, session, params }) {
-    const { id } = params;
-    
-    const todo = await Todo.find(id);
+  async destroy({ request, response, session, params }) {
+    const { todo } = request;
 
-    if (todo) {
-      await todo.delete();
-      session.flash({ notification: 'Todo deleted successfully.' });
-      return response.redirect('/');
-    }
-
-    session.flash({ notification: 'Todo was not found.' });
+    await todo.delete();
+    session.flash({ notification: 'Todo deleted successfully.' });
     return response.redirect('/');
   }
 }

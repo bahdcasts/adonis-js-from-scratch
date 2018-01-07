@@ -18,6 +18,6 @@ const Todo = use('App/Models/Todo');
 
 Route.get('/', 'TodoController.index');
 Route.post('/', 'TodoController.store').validator('SaveTodo');
-Route.get('/todos/delete/:id', 'TodoController.destroy');
-Route.get('/todos/edit/:id', 'TodoController.edit');
-Route.post('/todos/update/:id', 'TodoController.update').validator('SaveTodo');
+Route.get('/todos/delete/:id', 'TodoController.destroy').middleware('findTodo');
+Route.get('/todos/edit/:id', 'TodoController.edit').middleware('findTodo');
+Route.post('/todos/update/:id', 'TodoController.update').validator('SaveTodo').middleware('findTodo');
