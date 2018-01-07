@@ -15,7 +15,12 @@
           <div class="card-body">
             <form action="{{ route('TodoController.store') }}" method="POST">
               {{ csrfField() }}
-              <input type="text" class="form-control" name="text" placeholder="Type in todo ..." autofocus>
+              <input type="text" class="form-control mb-3" name="text" placeholder="Type in todo ..." autofocus>
+              @if(hasErrorFor('text'))
+                <span class="text-danger">
+                  {{ getErrorFor('text') }}
+                </span>
+              @endif
             </form>
           </div>
         </div>

@@ -11,7 +11,7 @@ class TodoController {
     return view.render('home', { todos: todos.toJSON() });
   }
 
-  async store ({ request, response }) {
+  async store ({ request, response, session }) {
     const body = request.all();
 
     // validate the data 
@@ -26,7 +26,8 @@ class TodoController {
 
     const validator = await validateAll(body, rules, messages);
     if (validator.fails()) {
-      console.log(validator.messages());
+      
+      session.withErrors(validator.messages()).flashAll();
       return response.redirect('/');
     }
 
