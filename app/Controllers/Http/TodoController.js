@@ -4,8 +4,7 @@ const { validateAll } = use('Validator');
 const Todo = use('App/Models/Todo');
 
 class TodoController {
-  async index ({ view }) {
-    // fetch some data
+  async index ({ view, auth }) {
     const todos = await Todo.all();
     
     return view.render('home', { todos: todos.toJSON() });
