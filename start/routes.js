@@ -26,3 +26,6 @@ Route.group(() => {
   Route.get('/edit/:id', 'TodoController.edit');
   Route.post('/update/:id', 'TodoController.update').validator('SaveTodo');
 }).prefix('/todos').middleware('findTodo');
+
+Route.on('/auth/signup').render('auth.sign-up');
+Route.post('/auth/signup', 'UserController.store');
