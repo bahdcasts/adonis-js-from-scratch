@@ -25,5 +25,12 @@ Route.group(() => {
   Route.post('/update/:id', 'TodoController.update').validator('SaveTodo');
 }).prefix('/todos').middleware('findTodo');
 
+Route.get('/logout', async ({ auth, response }) => {
+  await auth.logout();
+  return response.redirect('/');
+});
+
 Route.on('/auth/signup').render('auth.sign-up');
+Route.on('/auth/signin').render('auth.sign-in');
 Route.post('/auth/signup', 'UserController.store');
+Route.post('/auth/signin', 'UserController.signIn');
