@@ -33,4 +33,4 @@ Route.get('/logout', async ({ auth, response }) => {
 Route.on('/auth/signup').render('auth.sign-up');
 Route.on('/auth/signin').render('auth.sign-in');
 Route.post('/auth/signup', 'UserController.store').validator('SignUpUser');
-Route.post('/auth/signin', 'UserController.signIn');
+Route.post('/auth/signin', 'UserController.signIn').validator('SignInUser');

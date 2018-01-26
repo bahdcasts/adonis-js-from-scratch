@@ -1,10 +1,9 @@
 'use strict'
 
-class SignUpUser {
+class SignInUser {
   get rules() {
     return {
-      'username': 'required|unique:users',
-      'email': 'required|unique:users',
+      'email': 'required|email',
       'password': 'required'
     }
   }
@@ -19,8 +18,8 @@ class SignUpUser {
     this.ctx.session.withErrors(errorMessages)
       .flashAll();
 
-    return this.ctx.response.redirect('back');
+    this.ctx.response.redirect('back');
   }
 }
 
-module.exports = SignUpUser
+module.exports = SignInUser

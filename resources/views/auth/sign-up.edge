@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
               <label>Email address</label>
-              <input type="email" class="form-control" name="email" id="exampleInputEmail1">
+              <input type="email" class="form-control" value="{{ old('email', '') }}" name="email" id="exampleInputEmail1">
               @if(hasErrorFor('email'))
                 <small class="form-text text-danger">{{ getErrorFor('email') }}</small>
               @endif
