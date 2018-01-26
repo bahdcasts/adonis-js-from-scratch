@@ -9,6 +9,11 @@
   <div class="col-md-8 offset-md-2">
     <div class="card">
       <div class="card-body">
+        @if(flashMessage('error'))
+          <span class="text-danger text-center">
+            {{ flashMessage('error') }}
+          </span>
+        @endif
         <form method="POST" action="{{ route('UserController.signIn') }}">
           {{ csrfField() }}
             <div class="form-group">

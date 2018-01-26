@@ -30,7 +30,9 @@ Route.get('/logout', async ({ auth, response }) => {
   return response.redirect('/');
 });
 
-Route.on('/auth/signup').render('auth.sign-up');
-Route.on('/auth/signin').render('auth.sign-in');
-Route.post('/auth/signup', 'UserController.store').validator('SignUpUser');
-Route.post('/auth/signin', 'UserController.signIn').validator('SignInUser');
+Route.group(() => {
+  Route.on('/signup').render('auth.sign-up');
+  Route.on('/signin').render('auth.sign-in');
+  Route.post('/signup', 'UserController.store').validator('SignUpUser');
+  Route.post('/signin', 'UserController.signIn').validator('SignInUser');
+}).prefix('/auth');

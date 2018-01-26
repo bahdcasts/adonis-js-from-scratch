@@ -18,7 +18,7 @@ class UserController {
       session.flash({ notification: 'Login Successful.' });
       return response.redirect('/');
     } catch (error) {
-      console.log(error);
+      session.flash({ error: 'These credentials do not match our records.' });
       return response.redirect('back');
     }
   }
