@@ -9,9 +9,9 @@ class UserController {
 
     await auth.login(user);
 
-    await Mail.send('emails.welcome', {}, (message) => {
-      message.from('foo@bar.com')
-      message.to('bar@baz.com')
+    await Mail.send('emails.welcome', { user }, (message) => {
+      message.from('frantz@bahdcasts.com')
+      message.to(user.email)
     })
     return response.redirect('/');
   }
