@@ -1,5 +1,6 @@
 'use strict'
 
+const Mail = use('Mail');
 const User = use('App/Models/User');
 
 class UserController {
@@ -7,6 +8,11 @@ class UserController {
     const user = await User.create(request.only(['username', 'email', 'password']));
 
     await auth.login(user);
+
+    await Mail.send('emails.welcome', {}, (message) => {
+      message.from('foo@bar.com')
+      message.to('bar@baz.com')
+    })
     return response.redirect('/');
   }
 
