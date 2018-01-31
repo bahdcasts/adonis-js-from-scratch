@@ -17,7 +17,9 @@ const Route = use('Route');
 const Todo = use('App/Models/Todo');
 
 Route.get('/', 'TodoController.index');
-Route.post('/', 'TodoController.store').validator('SaveTodo');
+Route.post('/', 'TodoController.store')
+    .validator('SaveTodo')
+    .middleware('auth');
 
 Route.group(() => {
   Route.get('/delete/:id', 'TodoController.destroy');

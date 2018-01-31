@@ -7,6 +7,7 @@ class TodosSchema extends Schema {
     this.create('todos', (table) => {
       table.increments()
       table.string('text')
+      table.integer('user_id')
       table.timestamps()
     })
   }

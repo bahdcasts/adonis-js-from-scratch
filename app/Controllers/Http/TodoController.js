@@ -10,11 +10,12 @@ class TodoController {
     return view.render('home', { todos: todos.toJSON() });
   }
 
-  async store ({ request, response, session }) {
+  async store ({ request, response, session, auth }) {
     const body = request.all();
 
     const todo = await Todo.create({
-      text: body.text
+      text: body.text,
+      user_id: auth.user.id
     });
     session.flash({ notification: 'Todo created successfully.' });
     return response.redirect('/');

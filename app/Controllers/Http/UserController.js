@@ -4,15 +4,12 @@ const Mail = use('Mail');
 const User = use('App/Models/User');
 
 class UserController {
-  async store ({ request, response, auth }) {
+  async store({ request, response, auth }) {
     const user = await User.create(request.only(['username', 'email', 'password']));
 
     await auth.login(user);
 
-    await Mail.send('emails.welcome', { user }, (message) => {
-      message.from('frantz@bahdcasts.com')
-      message.to(user.email)
-    })
+
     return response.redirect('/');
   }
 

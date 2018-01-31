@@ -15,6 +15,10 @@ class User extends Model {
      */
     this.addHook('beforeCreate', 'User.hashPassword')
   }
+  
+  todos() {
+    return this.hasMany('App/Models/Todo');
+  }
 
   /**
    * A relationship on tokens is required for auth to
