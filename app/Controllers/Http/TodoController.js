@@ -5,7 +5,8 @@ const Todo = use('App/Models/Todo');
 
 class TodoController {
   async index ({ view, auth }) {
-    const todos = await Todo.all();
+    const todos = await auth.user.todos().fetch();
+    console.log(todos);
     
     return view.render('home', { todos: todos.toJSON() });
   }
@@ -13,9 +14,8 @@ class TodoController {
   async store ({ request, response, session, auth }) {
     const body = request.all();
 
-    const todo = await Todo.create({
-      text: body.text,
-      user_id: auth.user.id
+    const todo = await auth.user.todos().create({
+      text: body.text
     });
     session.flash({ notification: 'Todo created successfully.' });
     return response.redirect('/');
