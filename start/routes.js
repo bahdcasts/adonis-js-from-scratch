@@ -16,10 +16,12 @@
 const Route = use('Route');
 const Todo = use('App/Models/Todo');
 
-Route.get('/', 'TodoController.index');
+Route.on('/').render('index');
+Route.get('/dashboard', 'TodoController.index')
+  .middleware('auth');
 Route.post('/', 'TodoController.store')
-    .validator('SaveTodo')
-    .middleware('auth');
+  .validator('SaveTodo')
+  .middleware('auth');
 
 Route.group(() => {
   Route.get('/delete/:id', 'TodoController.destroy');
@@ -37,4 +39,5 @@ Route.group(() => {
   Route.on('/signin').render('auth.sign-in');
   Route.post('/signup', 'UserController.store').validator('SignUpUser');
   Route.post('/signin', 'UserController.signIn').validator('SignInUser');
-}).prefix('/auth');
+}).prefix('/auth')
+  .middleware('redirectIfAuthenticated');

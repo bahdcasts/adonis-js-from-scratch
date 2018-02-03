@@ -37,7 +37,8 @@ const globalMiddleware = [
 */
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
-  findTodo: 'App/Middleware/FindTodo'
+  findTodo: 'App/Middleware/FindTodo',
+  redirectIfAuthenticated: 'App/Middleware/RedirectIfAuthenticated'
 }
 
 /*
