@@ -17,11 +17,12 @@ const Route = use('Route');
 const Todo = use('App/Models/Todo');
 
 Route.on('/').render('index');
-Route.get('/dashboard', 'TodoController.index')
-  .middleware('auth');
-Route.post('/', 'TodoController.store')
-  .validator('SaveTodo')
-  .middleware('auth');
+
+Route.group(() => {
+  Route.get('/dashboard', 'TodoController.index')
+  Route.post('/', 'TodoController.store')
+    .validator('SaveTodo')
+}).middleware('auth');
 
 Route.group(() => {
   Route.get('/delete/:id', 'TodoController.destroy');

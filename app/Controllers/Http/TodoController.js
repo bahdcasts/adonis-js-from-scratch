@@ -6,7 +6,6 @@ const Todo = use('App/Models/Todo');
 class TodoController {
   async index ({ view, auth }) {
     const todos = await auth.user.todos().fetch();
-    console.log(todos);
     
     return view.render('home', { todos: todos.toJSON() });
   }
@@ -18,7 +17,7 @@ class TodoController {
       text: body.text
     });
     session.flash({ notification: 'Todo created successfully.' });
-    return response.redirect('/');
+    return response.redirect('/dashboard');
   }
 
 
@@ -32,7 +31,7 @@ class TodoController {
     await todo.save();
 
     session.flash({ notification: 'Todo updated successfully.' });
-    return response.redirect('/');
+    return response.redirect('/dashboard');
   }
 
   async destroy({ request, response, session, params }) {
@@ -40,7 +39,7 @@ class TodoController {
 
     await todo.delete();
     session.flash({ notification: 'Todo deleted successfully.' });
-    return response.redirect('/');
+    return response.redirect('/dashboard');
   }
 }
 

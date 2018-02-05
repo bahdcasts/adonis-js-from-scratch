@@ -9,7 +9,6 @@ class UserController {
 
     await auth.login(user);
 
-
     return response.redirect('/');
   }
 
