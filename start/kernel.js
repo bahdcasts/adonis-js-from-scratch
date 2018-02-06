@@ -38,6 +38,7 @@ const globalMiddleware = [
 const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   findTodo: 'App/Middleware/FindTodo',
+  userPlan: 'App/Middleware/UserPlan',
   redirectIfAuthenticated: 'App/Middleware/RedirectIfAuthenticated'
 }
 

@@ -21,19 +21,11 @@ class TodoController {
   }
 
 
-  async edit({ request, response, session, view, auth }) {
-    if (auth.user.plan === 'free') {
-      session.flash({ notification: 'You need to be on a premium plan to be able to edit.' });
-      return response.redirect('back');
-    }
+  async edit({ request, view }) {
     return view.render('edit-todo', { todo: request.todo });
   }
 
-  async update({ response, request, session, params, auth }) {
-    if (auth.user.plan === 'free') {
-      session.flash({ notification: 'You need to be on a premium plan to be able to edit.' });
-      return response.redirect('back');
-    }
+  async update({ response, request, session, params }) {
     const { todo } = request;
     todo.text = request.all().text;
     await todo.save();
@@ -42,11 +34,7 @@ class TodoController {
     return response.redirect('/dashboard');
   }
 
-  async destroy({ request, response, session, params, auth }) {
-    if (auth.user.plan === 'free') {
-      session.flash({ notification: 'You need to be on a premium plan to be able to edit.' });
-      return response.redirect('back');
-    }
+  async destroy({ request, response, session, params }) {
     const { todo } = request;
 
     await todo.delete();

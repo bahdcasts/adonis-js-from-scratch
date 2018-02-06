@@ -28,7 +28,7 @@ Route.group(() => {
   Route.get('/delete/:id', 'TodoController.destroy');
   Route.get('/edit/:id', 'TodoController.edit');
   Route.post('/update/:id', 'TodoController.update').validator('SaveTodo');
-}).prefix('/todos').middleware('findTodo');
+}).prefix('/todos').middleware('findTodo').middleware('userPlan');
 
 Route.get('/logout', async ({ auth, response }) => {
   await auth.logout();
